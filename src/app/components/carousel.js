@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 const items = [
-  "/Images/scroll.png",
-  "/Images/scroll1.png",
+  "/Images/squidgame.jpg",
+  "/Images/gladiator.jpg",
   "/Images/scroll2.png",
 ];
 
@@ -38,7 +38,7 @@ export const Carousel = () => {
           <img
             src={img}
             key={index}
-            className="object-cover h-[600px] w-full object-cover"
+            className="h-[600px] w-full object-cover"
           />
         ))}
       </div>
@@ -52,7 +52,7 @@ export const Carousel = () => {
         onClick={nextButton}
         className="flex justify-center items-center absolute right-[44px] top-1/2 transform -translate-y-1/2 bg-[white] p-[12px] text-[black] rounded-full h-[40px] w-[40px]"
       >
-         ❯
+        ❯
       </button>
     </div>
   );

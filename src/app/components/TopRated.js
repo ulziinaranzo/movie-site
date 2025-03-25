@@ -4,37 +4,41 @@ import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
 
 const items = [
-  { img: "Images/upcoming-box.png", rating: "6.9", name: "Dear Santa" },
+  { img: "Images/toprated-1.png", rating: "6.9", name: "Pulp Fiction" },
   {
-    img: "Images/upcoming-box2.png",
+    img: "Images/toprated-2.png",
     rating: "6.9",
-    name: "How To Train Your Dragon Live Action",
+    name: "The Lord of the Rings: Fellowship of the Kings",
   },
   ,
-  { img: "Images/upcoming-box3.png", rating: "6.9", name: "Alien Romulus" },
-  { img: "Images/upcoming-box4.png", rating: "6.9", name: "From the Ashes" },
-  { img: "Images/upcoming-box5.png", rating: "6.9", name: "Space Dogg" },
-  { img: "Images/upcoming-box6.png", rating: "6.9", name: "The Order" },
-  { img: "Images/upcoming-box7.png", rating: "6.9", name: "Y2K" },
   {
-    img: "Images/upcoming-box8.png",
+    img: "Images/toprated-3.png",
     rating: "6.9",
-    name: "Solo Leveling: ReAwakening",
+    name: "The Good, the Bad and the Ugly",
   },
-  { img: "Images/upcoming-box9.png", rating: "6.9", name: "Get away" },
+  { img: "Images/toprated-4.png", rating: "6.9", name: "Forrest Gump" },
+  { img: "Images/toprated-5.png", rating: "6.9", name: "Fight Club" },
+  { img: "Images/toprated-6.png", rating: "6.9", name: "Saving Private Ryan" },
+  { img: "Images/toprated-7.png", rating: "6.9", name: "City of God" },
   {
-    img: "Images/upcoming-box10.png",
+    img: "Images/toprated-8.png",
     rating: "6.9",
-    name: "Sonic the Hedgehog 3",
+    name: "The Green Mile",
+  },
+  { img: "Images/toprated-9.png", rating: "6.9", name: "Life is Beautiful" },
+  {
+    img: "Images/toprated-10.png",
+    rating: "6.9",
+    name: "Terminator 2: Judgement Day",
   },
 ];
 
-export const Upcoming = () => {
+export const TopRated = () => {
   return (
     <div className="flex flex-col w-[1440px] m-auto h-fit pl-[80px] pr-[80px] pb-[52px] gap-[32px]">
       <div className="flex justify-between text-center items-center">
         <div className="flex text-[24px] font-[600] text-[white] mb-[4px]">
-          Upcoming
+          Top Rated
         </div>
         <div className="flex items-center text-[14px] font-[500px] gap-[8px]">
           See more <ArrowIcon />{" "}
@@ -49,14 +53,10 @@ export const Upcoming = () => {
             >
               <img src={img} className="flex w-[229.73px] h-[340px]" />
               <div className="flex flex-col bg-[#F4F4F5] h-[99px] p-[8px]">
-                <div className="flex text-[16px] text-[black] gap-[5px]">
+                <div className="flex text-[14px] gap-[4px] text-[black]">
                   <StarIcon />
-                  <div className="flex">
-                    <b>{rating}</b>
-                    <div className="flex text-[12px text-[black]">/10</div>
-                  </div>
+                  <b>{rating}</b>/10
                 </div>
-
                 <div className="flex text-[18px] text-[black]">{name}</div>
               </div>
             </div>
