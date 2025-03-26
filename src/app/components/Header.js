@@ -26,7 +26,7 @@ export const Header = () => {
       </div>
       <div className="flex gap-[12px]">
         <img
-          className="w-[36px] h-[36px] rounded-xl"
+          className=" lg:hidden w-[36px] h-[36px] rounded-xl"
           src="/Images/Search.png"
         />
         <img className="w-[36px] h-[36px] rounded-xl " src="/Images/Moon.png" />

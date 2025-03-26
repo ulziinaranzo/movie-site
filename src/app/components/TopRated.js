@@ -10,7 +10,6 @@ const items = [
     rating: "6.9",
     name: "The Lord of the Rings: Fellowship of the Kings",
   },
-  ,
   {
     img: "Images/toprated-3.png",
     rating: "6.9",
@@ -35,29 +34,36 @@ const items = [
 
 export const TopRated = () => {
   return (
-    <div className="flex flex-col w-[1440px] m-auto h-fit pl-[80px] pr-[80px] pb-[52px] gap-[32px]">
+    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px]">
       <div className="flex justify-between text-center items-center">
         <div className="flex text-[24px] font-[600] text-[white] mb-[4px]">
           Top Rated
         </div>
-        <div className="flex items-center text-[14px] font-[500px] gap-[8px]">
-          See more <ArrowIcon />{" "}
+        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer">
+          See more <ArrowIcon />
         </div>
       </div>
-      <div className="flex flex-wrap gap-[32px]">
+      <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {items.map(({ img, rating, name }, index) => {
           return (
             <div
               key={index}
-              className="flex flex-col rounded-lg overflow-hidden w-[229.73px] h-[439px]"
+              className="flex flex-col items-center rounded-lg overflow-hidden"
             >
-              <img src={img} className="flex w-[229.73px] h-[340px]" />
-              <div className="flex flex-col bg-[#F4F4F5] h-[99px] p-[8px]">
-                <div className="flex text-[14px] gap-[4px] text-[black]">
+              {/* Movie Image */}
+              <img
+                src={img}
+                className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
+              />
+
+              {/* Movie Details */}
+              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col justify-between">
+                <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                   <StarIcon />
-                  <b>{rating}</b>/10
+                  <b>{rating}</b>
+                  <span className="text-[12px] text-black">/10</span>
                 </div>
-                <div className="flex text-[18px] text-[black]">{name}</div>
+                <div className="text-sm lg:text-[18px] text-black">{name}</div>
               </div>
             </div>
           );
