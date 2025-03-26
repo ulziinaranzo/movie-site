@@ -31,31 +31,34 @@ const items = [
 export const Upcoming = () => {
   return (
     <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit p-[20px] lg:p-[80px] gap-[20px] lg:gap-[32px]">
-      {/* Header */}
       <div className="flex justify-between items-center">
-        <div className="text-[24px] font-[600] text-white mb-[4px]">Upcoming</div>
+        <div className="text-[24px] font-[600] text-white mb-[4px]">
+          Upcoming
+        </div>
         <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer">
           See more <ArrowIcon />
         </div>
       </div>
 
-      {/* Movie Grid */}
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {items.map(({ img, rating, name }, index) => {
           return (
-            <div key={index} className="flex flex-col items-center rounded-lg overflow-hidden">
-              {/* Movie Image */}
+            <div
+              key={index}
+              className="flex flex-col items-center rounded-lg overflow-hidden"
+            >
               <img
                 src={img}
                 className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
               />
 
-              {/* Movie Details */}
-              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col justify-between">
+              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
                 <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                   <StarIcon />
                   <b>{rating}</b>
-                  <span className="text-[12px] text-black">/10</span>
+                  <span className="text-[12px] text-[#71717A] font-[500]">
+                    /10
+                  </span>
                 </div>
                 <div className="text-sm lg:text-[18px] text-black">{name}</div>
               </div>

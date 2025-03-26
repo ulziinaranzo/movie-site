@@ -50,18 +50,17 @@ export const TopRated = () => {
               key={index}
               className="flex flex-col items-center rounded-lg overflow-hidden"
             >
-              {/* Movie Image */}
               <img
                 src={img}
                 className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
               />
-
-              {/* Movie Details */}
-              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col justify-between">
+              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
                 <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                   <StarIcon />
                   <b>{rating}</b>
-                  <span className="text-[12px] text-black">/10</span>
+                  <span className="text-[12px] text-[#71717A] font-[500]">
+                    /10
+                  </span>
                 </div>
                 <div className="text-sm lg:text-[18px] text-black">{name}</div>
               </div>
