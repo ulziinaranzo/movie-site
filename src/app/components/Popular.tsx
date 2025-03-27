@@ -56,9 +56,9 @@ export const Popular = () => {
             >
               <img
                 src={img}
-                className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
+                className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px] overflow-hidden"
               />
-              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
+              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col overflow-hidden">
                 <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                   <StarIcon />
                   <b>{rating}</b>

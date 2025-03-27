@@ -14,6 +14,28 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react";
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+import { StarWhite } from "../assets/StarWhite";
+import { ArrowIcon } from "../assets/ArrowIcon";
+import { CommandDialog } from "cmdk";
 
 const type = [
   "Action",
@@ -63,9 +85,13 @@ export const Header = () => {
               <LineIcon />
             </div>
             <div className="flex flex-wrap w-[537px] gap-[16px]">
-              {type.map((item) => {
+              {type.map((item, index) => {
                 return (
-                  <Badge variant="outline">
+                  <Badge
+                    variant="outline"
+                    key={index}
+                    className="cursor-pointer"
+                  >
                     {item}
                     <GenreIcon />
                   </Badge>
@@ -75,22 +101,72 @@ export const Header = () => {
           </PopoverContent>
         </Popover>
 
-        <div className="hidden lg:flex items-center pl-[12px] pt-[10px] pb-[10px] w-[279px] h-[36px] rounded-[10px] text-[14px] opacity-50 border border-[#272722A]">
-          <img
-            className="flex w-16px h-16px"
-            src="/Images/_magnifying-glass.png"
-          />
-          <input
-            className="w-[253px] h-[36px] text-white divide-none outline-none"
-            placeholder="Search"
-          />
-          {/* <input
-            type="text"
-            className="w-[253px] h-[36px]  bg-transparent divide-none outline-none left-[90px] top-[40px]"
-            placeholder="Search"
-          /> */}
-        </div>
+        <Command className="hidden lg:flex rounded-lg border shadow-md md:min-w-[279px] text-white bg-black">
+          <CommandInput placeholder="Search" />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <CommandItem>
+                <div className="flex w-[577px] h-max-[729px] p-[8px] gap-[16px]">
+                  <img
+                    src="/Images/wicked-poster.png"
+                    className="w-[67px] h-[100px]"
+                  />
+                  <div className="flex justify-left flex-col ">
+                    <div className="font-[600] text-[20px] text-white">
+                      Wicked
+                    </div>
+                    <div className="flex">
+                      <div className="w-[16px] h-[18px]">
+                        <StarWhite />
+                      </div>
+                      <div className="font-[400] text-[16px] text-white">
+                        6.9
+                      </div>
+                      <div className="font-[300] text-[14px] text-[#A1A1AA]">
+                        /10
+                      </div>
+                    </div>
+                    <div className="flex font-[500] text-[14px] text-white mt-[30px]">
+                      2024
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center mt-[79px] ml-[310px] text-[14px] font-[500] text-white">
+                    See more <ArrowIcon />
+                  </div>
+                </div>
+              </CommandItem>
+              <CommandItem>
+                <Smile />
+                <span>Search Emoji</span>
+              </CommandItem>
+              <CommandItem disabled>
+                <Calculator />
+                <span>Calculator</span>
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Settings">
+              <CommandItem>
+                <User />
+                <span>Profile</span>
+                <CommandShortcut>⌘P</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <CreditCard />
+                <span>Billing</span>
+                <CommandShortcut>⌘B</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <Settings />
+                <span>Settings</span>
+                <CommandShortcut>⌘S</CommandShortcut>
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </Command>
       </div>
+
       <div className="flex gap-[12px]">
         <img
           className=" lg:hidden w-[36px] h-[36px] rounded-xl"

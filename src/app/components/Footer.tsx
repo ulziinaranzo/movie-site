@@ -5,8 +5,8 @@ import { Phone } from "../assets/PhoneIcon";
 
 export const Footer = () => {
   return (
-    <div className="flex w-full h-[280px] bg-[#4338CA] pt-[40px] pb-[40px] pl-[80px] pr-[80px]">
-      <div className="flex gap-[28px] lg:gap-[96px] flex-col lg:flex lg:justify-between">
+    <div className="flex w-full h-[280px] bg-[#4338CA] lg:pt-[40px] lg:pb-[40px] lg:pl-[80px] lg:pr-[80px] pl-[20px] pr-[20px] pt-[40px] pb-[20px]">
+      <div className="flex gap-[28px] lg:gap-[96px] flex-col lg:flex lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-[12px]">
           <img src="/Images/LogoWhite.png" className="w-[92px] h-[20px]" />
           <div className="text-[#FAFAFA] font-[400] text-[14px]">
@@ -33,7 +33,7 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-[12px] text-[#FAFAFA] text-[14px] font-[400]">
+          <div className="flex flex-col gap-[12px] text-[#FAFAFA] text-[14px] font-[400] ml-[48px] lg:ml-[96px]">
             <div>Follow us </div>
             <div>
               <div className="flex flex-col lg:flex-row gap-[12px]">
