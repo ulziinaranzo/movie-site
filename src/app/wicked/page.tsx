@@ -33,19 +33,6 @@ const items = [
     rating: "6.9",
     name: "The Lord of the Rings: The Return of the King",
   },
-  { img: "Images/popular-6.png", rating: "6.9", name: "Interstellar" },
-  { img: "Images/popular-7.png", rating: "6.9", name: "Se7en" },
-  {
-    img: "Images/popular-8.png",
-    rating: "6.9",
-    name: "It’s a Wonderful Life",
-  },
-  { img: "Images/popular-9.png", rating: "6.9", name: "Seven Samurai" },
-  {
-    img: "Images/popular-10.png",
-    rating: "6.9",
-    name: "The Silence of the Lambs",
-  },
 ];
 
 export default function Home() {
@@ -69,7 +56,7 @@ export default function Home() {
               <div className="flex flex-col">
                 <div className="flex">
                   <div className="font-[400] text-[16px] text-white">6.9</div>
-                  <div className="font-[300] text-[14px] text-[#A1A1AA]">
+                  <div className="font-[300] text-[14px] text-[#A1A1AA] mt-[2px]">
                     /10
                   </div>
                 </div>
@@ -107,7 +94,7 @@ export default function Home() {
             {description.map((item, index) => {
               return (
                 <div className="flex flex-col" key={index}>
-                  <div className="font-bold text-[16px] text-[white]">
+                  <div className="flex font-bold text-[16px] text-[white]">
                     Director
                   </div>
                   <div className="text-[16px] font-[400] text-white">
@@ -132,6 +119,7 @@ export default function Home() {
               );
             })}
           </div>
+          <div className=""></div>
           <div className="flex flex-col">
             <div className="flex justify-between mb-[36px]">
               <div className="text-[24px] font-semibold">More Like This</div>

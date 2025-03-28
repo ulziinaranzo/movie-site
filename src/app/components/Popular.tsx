@@ -43,7 +43,7 @@ export const Popular = () => {
         <div className="flex text-[24px] font-[600] text-[white] mb-[4px]">
           Popular
         </div>
-        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer">
+        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer text-white">
           See more <ArrowIcon />
         </div>
       </div>

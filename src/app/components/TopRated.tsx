@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
+import Link from "next/link";
 
 const items = [
   { img: "Images/toprated-1.png", rating: "6.9", name: "Pulp Fiction" },
@@ -39,9 +40,11 @@ export const TopRated = () => {
         <div className="flex text-[24px] font-[600] text-[white] mb-[4px]">
           Top Rated
         </div>
-        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer">
-          See more <ArrowIcon />
-        </div>
+        <Link href={"/topRated"}>
+          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer text-white">
+            See more <ArrowIcon />
+          </div>
+        </Link>
       </div>
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {items.map(({ img, rating, name }, index) => {

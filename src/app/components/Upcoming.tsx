@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
+const [data, setData] = useState(null);
 
 const items = [
   { img: "Images/upcoming-box.png", rating: "6.9", name: "Dear Santa" },
@@ -35,7 +36,7 @@ export const Upcoming = () => {
         <div className="text-[24px] font-[600] text-white mb-[4px]">
           Upcoming
         </div>
-        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer">
+        <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer text-white">
           See more <ArrowIcon />
         </div>
       </div>
