@@ -38,7 +38,6 @@ const items = [
 export default function Home() {
   return (
     <div className="w-[1440px] h-fit m-auto">
-      <Header />
       <div className="flex flex-col bg-black lg:pl-[180px] lg:pr-[180px] lg:pt-[52px] lg:pb-[113px]">
         <div className="flex justify-between gap-[4px] mb-[24px]">
           <div className="flex flex-col">
@@ -157,7 +156,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

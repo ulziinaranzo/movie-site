@@ -1,35 +1,29 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
-const [data, setData] = useState(null);
 
-const items = [
-  { img: "Images/upcoming-box.png", rating: "6.9", name: "Dear Santa" },
-  {
-    img: "Images/upcoming-box2.png",
-    rating: "6.9",
-    name: "How To Train Your Dragon Live Action",
-  },
-  { img: "Images/upcoming-box3.png", rating: "6.9", name: "Alien Romulus" },
-  { img: "Images/upcoming-box4.png", rating: "6.9", name: "From the Ashes" },
-  { img: "Images/upcoming-box5.png", rating: "6.9", name: "Space Dogg" },
-  { img: "Images/upcoming-box6.png", rating: "6.9", name: "The Order" },
-  { img: "Images/upcoming-box7.png", rating: "6.9", name: "Y2K" },
-  {
-    img: "Images/upcoming-box8.png",
-    rating: "6.9",
-    name: "Solo Leveling: ReAwakening",
-  },
-  { img: "Images/upcoming-box9.png", rating: "6.9", name: "Get Away" },
-  {
-    img: "Images/upcoming-box10.png",
-    rating: "6.9",
-    name: "Sonic the Hedgehog 3",
-  },
-];
+const API_KEY = "4ab655174f58d5c4383d2b343e357314";
+const BASE_URL = "https://api.themoviedb.org/3";
 
 export const Upcoming = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchUpcomingMovies() {
+      try {
+        const response = await fetch(`${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
+        const data = await response.json();
+        setMovies(data.results.slice(0, 10)); // Only take the first 10 movies
+      } catch (error) {
+        console.error("Error fetching upcoming movies:", error);
+      }
+    }
+
+    fetchUpcomingMovies();
+  }, []);
+
   return (
     <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit p-[20px] lg:p-[80px] gap-[20px] lg:gap-[32px]">
       <div className="flex justify-between items-center">
@@ -42,30 +36,24 @@ export const Upcoming = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
-        {items.map(({ img, rating, name }, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col items-center rounded-lg overflow-hidden"
-            >
-              <img
-                src={img}
-                className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
-              />
+        {movies.map((movie, index) => (
+          <div key={index} className="flex flex-col items-center rounded-lg overflow-hidden">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
+            />
 
-              <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
-                <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
-                  <StarIcon />
-                  <b>{rating}</b>
-                  <span className="text-[12px] text-[#71717A] font-[500]">
-                    /10
-                  </span>
-                </div>
-                <div className="text-sm lg:text-[18px] text-black">{name}</div>
+            <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
+              <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
+                <StarIcon />
+                <b>{movie.vote_average.toFixed(1)}</b>
+                <span className="text-[12px] text-[#71717A] font-[500]">/10</span>
               </div>
+              <div className="text-sm lg:text-[18px] text-black">{movie.title}</div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );
