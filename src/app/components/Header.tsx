@@ -69,12 +69,13 @@ const type = [
 ];
 
 interface HeaderProps {
-  toggleDarkMode: () => void;
+  setDarkMode: () => void;
+  darkMode: boolean;
 }
 
-export const Header = ({toggleDarkMode }: HeaderProps) => {
+export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   return (
-    <div className="flex w-full justify-between m-0 h-fit bg-[black] py-[11.5px] px-5 lg:px-20 ">
+    <div className="flex w-full justify-between m-0 h-fit dark:bg-black bg-white py-[11.5px] px-5 lg:px-20 ">
       <Link href={"/"}>
         <img className="w-[92px] h-[20px] mt-[10px]" src="/Images/Logo.png" />
       </Link>
@@ -82,23 +83,25 @@ export const Header = ({toggleDarkMode }: HeaderProps) => {
       <div className="flex justify-center items-center gap-[12px] text-[14px] font-medium">
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline">Genres</Button>
+            <Button variant="outline" className="dark:text-white text-black">
+              Genres
+            </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[577px]  flex flex-col p-[20px]">
             <div className="text-[24px] font-[600] text-[#09090B]">Genres</div>
-            <div className="text-[16px] text-[#09090B] font-[400]">
+            <div className="text-[16px] font-[400] dark:text-white text-black">
               See lists of movies by genre
             </div>
             <div className="mt-[16px] mb-[16px]">
               <LineIcon />
             </div>
-            <div className="flex flex-wrap w-[537px] gap-[16px]">
+            <div className="flex flex-wrap w-[537px] gap-[16px] dark:bg-black dark:text-white bg-white text-black">
               {type.map((item, index) => {
                 return (
                   <Badge
                     variant="outline"
                     key={index}
-                    className="cursor-pointer"
+                    className="cursor-pointer bg-white dark:bg-black"
                   >
                     {item}
                     <GenreIcon />
@@ -116,7 +119,7 @@ export const Header = ({toggleDarkMode }: HeaderProps) => {
           <Input
             type="text"
             placeholder="Search"
-            className="text-white pl-[30px] w-[379px]"
+            className=" pl-[30px] w-[379px] dark:text-white text-black"
           />
           {/* <input
             type="text"
@@ -131,24 +134,15 @@ export const Header = ({toggleDarkMode }: HeaderProps) => {
           className=" lg:hidden w-[36px] h-[36px] rounded-xl"
           src="/Images/Search.png"
         />
-        <img className="w-[36px] h-[36px] rounded-xl " src="/Images/Moon.png" />
+        <img
+          className="w-[36px] h-[36px] rounded-xl "
+          src="/Images/Moon.png"
+          onClick={() => setDarkMode(!darkMode)}
+        />
       </div>
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // "use client";
 // import { Input } from "@/components/ui/input";

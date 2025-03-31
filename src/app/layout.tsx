@@ -7,13 +7,13 @@ import "./globals.css";
 import { PropsWithChildren } from "react";
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
     <html lang="en">
-      <body className={darkMode ? "bg-black text-white" : "bg-white text-black"}>
-        <div className="max-w-[1440px] mx-auto w-full">
-          <Header toggleDarkMode={() => setDarkMode(!darkMode)} />
+      <body className={darkMode ? "dark" : ""}>
+        <div className="max-w-[1440px] mx-auto w-full dark:bg-black bg-white">
+          <Header setDarkMode={setDarkMode} darkMode={darkMode} />
           <main>{children}</main>
           <Footer />
         </div>

@@ -56,9 +56,9 @@ export const Carousel = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center mb-[52px]">
       <Link href={"/wicked"}>
-        <div className="relative overflow-hidden pb-[52px] pt-[32px] w-[375px] h-[246px] lg:w-full lg:h-[600px]">
+        <div className="relative overflow-hidden pb-[52px] pt-[32px] w-[375px] h-[246px] lg:w-full lg:h-[600px] ">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${index * 100}%)` }}

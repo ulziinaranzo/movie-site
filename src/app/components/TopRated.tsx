@@ -4,42 +4,72 @@ import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
 import Link from "next/link";
+import axios from "axios";
 
-const API_KEY = "4ab655174f58d5c4383d2b343e357314";
-const BASE_URL = "https://api.themoviedb.org/3";
+const Access_Token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
 
+export type Movie = {
+  vote_average: number;
+  id: number;
+  genre_ids: number[];
+  backdrop_path: "string";
+  poster_path: "string";
+  title: "string";
+  overview: "string";
+};
+type Response = {
+  results: Movie[];
+};
 export const TopRated = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchTopRatedMovies() {
+    const getMoviesByAxios = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
-        const data = await response.json();
-        setMovies(data.results);
+        const { data } = await axios.get<Response>(
+          "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+          {
+            headers: {
+              Authorization: `Bearer ${Access_Token}`,
+            },
+          }
+        );
+        setMovies(data.results.slice(0, 10));
       } catch (error) {
-        console.error("Error fetching top-rated movies:", error);
+        console.error("Error fetching movies:", error);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    fetchTopRatedMovies();
+    getMoviesByAxios();
+
+    return () => {};
   }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px]">
+    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
-        <div className="flex text-[24px] font-[600] text-[white] mb-[4px]">
+        <div className="flex text-[24px] font-[600] text-black darl:text-white mb-[4px]">
           Top Rated
         </div>
         <Link href={"/topRated"}>
-          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer text-white">
+          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black">
             See more <ArrowIcon />
           </div>
         </Link>
       </div>
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {movies.map((movie, index) => (
-          <div key={index} className="flex flex-col items-center rounded-lg overflow-hidden">
+          <div
+            key={index}
+            className="flex flex-col items-center rounded-lg overflow-hidden"
+          >
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
@@ -49,9 +79,13 @@ export const TopRated = () => {
               <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                 <StarIcon />
                 <b>{movie.vote_average.toFixed(1)}</b>
-                <span className="text-[12px] text-[#71717A] font-[500]">/10</span>
+                <span className="text-[12px] text-[#71717A] font-[500]">
+                  /10
+                </span>
               </div>
-              <div className="text-sm lg:text-[18px] text-black">{movie.title}</div>
+              <div className="text-sm lg:text-[18px] text-black">
+                {movie.title}
+              </div>
             </div>
           </div>
         ))}
@@ -59,10 +93,6 @@ export const TopRated = () => {
     </div>
   );
 };
-
-
-
-
 
 // "use client";
 // import { useState, useEffect } from "react";
