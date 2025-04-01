@@ -51,7 +51,7 @@ export const Popular = () => {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
+    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-red-600 dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
         <div className="flex text-[24px] font-[600] text-black darl:text-white mb-[4px]">
           Popular
@@ -64,7 +64,7 @@ export const Popular = () => {
         {movies.map((movie, index) => (
           <div
             key={index}
-            className="flex flex-col items-center rounded-lg overflow-hidden"
+            className="flex flex-col items-center rounded-lg overflow-hidden hover:bg-sky-700 "
           >
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

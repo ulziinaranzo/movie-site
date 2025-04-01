@@ -112,7 +112,7 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   }, [searchValue]);
 
   return (
-    <div className="flex w-full justify-between m-0 h-fit dark:bg-black bg-white py-[11.5px] px-5 lg:px-20 pb-[32px] relative">
+    <div className="flex w-full justify-between m-0 h-fit dark:bg-black bg-white py-[11.5px] px-5 lg:px-20 relative">
       <Link href={"/"}>
         <img className="w-[92px] h-[20px] mt-[10px]" src="/Images/Logo.png" />
       </Link>
@@ -138,7 +138,7 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
                   <Badge
                     variant="outline"
                     key={index}
-                    className="cursor-pointer bg-white dark:bg-black"
+                    className="cursor-pointer bg-white dark:bg-black border-white"
                   >
                     {item}
                     <GenreIcon />

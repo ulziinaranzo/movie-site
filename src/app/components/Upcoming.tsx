@@ -5,6 +5,8 @@ import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 
 const Access_Token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
@@ -24,12 +26,13 @@ type Response = {
 export const UpComing = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const getMoviesByAxios = async () => {
       try {
         const { data } = await axios.get<Response>(
-          "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+          `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1`,
           {
             headers: {
               Authorization: `Bearer ${Access_Token}`,
@@ -48,21 +51,17 @@ export const UpComing = () => {
 
     return () => {};
   }, []);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
+    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] pt-[32px] gap-[32px]  dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
         <div className="flex text-[24px] font-[600] dark:text-white text-black mb-[4px]">
-          Upcoming Movies
+          Upcoming 
         </div>
-        <Link href={"/upcomingMovies"}>
-          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black">
+          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black"  onClick={() => {router.push("/upcoming")}}>
             See more <ArrowIcon />
           </div>
-        </Link>
       </div>
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {movies.map((movie) => (

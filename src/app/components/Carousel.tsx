@@ -86,7 +86,7 @@ export const Carousel = () => {
             ❯
           </button>
         </div>
-        <div className="w-full max-w-[375px] lg:max-w-[1040px] p-[20px] lg:p-[40px] lg:absolute top-60 left-80">
+        <div className="w-full max-w-[375px] lg:max-w-[1040px] p-[20px] lg:p-[40px] lg:absolute top-60 left-130">
           <div className="flex justify-between lg:flex-col">
             <div className="flex flex-col">
               <div className="text-[14px] lg:text-[16px] text-white font-regular">
@@ -101,7 +101,7 @@ export const Carousel = () => {
               <div className="w-6 h-6 lg:w-[10px] lg:h-[10px] lg:mt-[3px]">
                 <StarIcon />
               </div>
-              <div className="text-[16px] lg:text-[18px] font-mediumtext-white ml-[8px] lg:font-[600] text-[white] lg:text-[white]">
+              <div className="text-[16px] lg:text-[18px] font-medium text-white ml-[8px] lg:font-[600] text-[white] lg:text-[white]">
                 {items[index].rating}
               </div>
               <span className="text-[14px] lg:text-[16px] font-regular text-[#71717A] mt-[1px] ml-[1px] lg:mt-0.5 ">
