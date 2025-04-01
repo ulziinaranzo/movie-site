@@ -53,7 +53,7 @@ export const UpComing = () => {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
+    <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
         <div className="flex text-[24px] font-[600] dark:text-white text-black mb-[4px]">
           Upcoming Movies
