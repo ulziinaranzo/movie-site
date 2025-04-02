@@ -138,7 +138,8 @@ export default function Home() {
             <PaginationItem>
               <PaginationPrevious onClick={handlePrev} />
             </PaginationItem>
-            {startPage > 1 && <PaginationItem><PaginationEllipsis /></PaginationItem>}
+            {startPage > 1 && (<PaginationItem><PaginationLink onClick={() => handlePage(1)}>1</PaginationLink></PaginationItem>)}
+            {startPage > 2 && <PaginationEllipsis/>}
             {[...Array(endPage - startPage + 1)].map((_, index) => (
               <PaginationItem key={index}>
                 <PaginationLink
@@ -149,6 +150,7 @@ export default function Home() {
                 </PaginationLink>
               </PaginationItem>
             ))}
+            {endPage < totalPages - 1 && <PaginationEllipsis />}
             {endPage < totalPages && (
               <PaginationItem>
                 <PaginationLink onClick={() => handlePage(totalPages)}>

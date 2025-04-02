@@ -6,6 +6,7 @@ import { StarIcon } from "../assets/StarIcon";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Key } from "lucide-react";
 
 
 const Access_Token =
@@ -65,8 +66,10 @@ export const UpComing = () => {
       </div>
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {movies.map((movie) => (
+          <Link href={`/movie/${movie.id}` }
+          key={movie.id}
+          >
           <div
-            key={movie.id}
             className="flex flex-col items-center rounded-lg overflow-hidden"
           >
             <img
@@ -87,6 +90,7 @@ export const UpComing = () => {
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>

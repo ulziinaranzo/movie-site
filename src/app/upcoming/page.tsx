@@ -1,152 +1,3 @@
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import { ArrowIcon } from "../assets/ArrowIcon";
-// import { StarIcon } from "../assets/StarIcon";
-// import Link from "next/link";
-// import axios from "axios";
-// import {
-//   Pagination,
-//   PaginationContent,
-//   PaginationEllipsis,
-//   PaginationItem,
-//   PaginationLink,
-//   PaginationNext,
-//   PaginationPrevious,
-// } from "@/components/ui/pagination";
-
-// const Access_Token =
-//   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
-
-// export type Movie = {
-//   vote_average: number;
-//   id: number;
-//   genre_ids: number[];
-//   backdrop_path: "string";
-//   poster_path: "string";
-//   title: "string";
-//   overview: "string";
-// };
-
-// type Response = {
-//   results: Movie[];
-//   total_pages: number;
-//   total_results: number;
-// };
-
-// export default function Home() {
-//   const [movies, setMovies] = useState<Movie[]>([]);
-//   const [loading, setLoading] = useState<boolean>(true);
-//    const [page, setPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(1);
-
-//   const handlePrev = () => {
-//     if (page > 1) {
-//       setPage((prev) => prev - 1);
-//     }
-//   };
-
-//   const handleNext = () => {
-//     if (page < totalPages) {
-//       setPage((prev) => prev + 1);
-//     }
-//   };
-
-//   const handlePage = (page: number) => {
-//     setPage(page);
-//   };
-
-//   useEffect(() => {
-//     const getMoviesByAxios = async () => {
-//       setLoading(true); 
-//       try {
-//         const { data } = await axios.get<Response>(
-//           `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
-//           {
-//             headers: {
-//               Authorization: `Bearer ${Access_Token}`,
-//             },
-//           }
-//         );
-//         setMovies(data.results);
-//         setTotalPages(data.total_pages); 
-//       } catch (error) {
-//         console.error("Error fetching movies:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     getMoviesByAxios();
-//   }, [page]); 
-
-//   if (loading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
-//       <div className="flex justify-between text-center items-center">
-//         <div className="flex text-[24px] font-[600] dark:text-white text-black mb-[4px]">
-//           Upcoming Movies
-//         </div>
-//       </div>
-//       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
-//         {movies.map((movie) => (
-//           <div
-//             key={movie.id}
-//             className="flex flex-col items-center rounded-lg overflow-hidden"
-//           >
-//             <img
-//               src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-//               alt={movie.title}
-//               className="object-cover w-[158px] h-[233px] lg:w-full lg:h-[340px]"
-//             />
-//             <div className="bg-[#F4F4F5] w-[157px] h-[76px] lg:w-full lg:h-[99px] p-[8px] flex flex-col">
-//               <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
-//                 <StarIcon />
-//                 <b>{movie.vote_average.toFixed(1)}</b>
-//                 <span className="text-[12px] text-[#71717A] font-[500]">
-//                   /10
-//                 </span>
-//               </div>
-//               <div className="text-sm lg:text-[18px] text-black">
-//                 {movie.title}
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//       <div className="flex justify-items-end">
-//         <Pagination>
-//           <PaginationContent>
-//             <PaginationItem>
-//               <PaginationPrevious onClick={handlePrev} />
-//             </PaginationItem>
-//             {[...Array(totalPages)].map((_, index) => (
-//               <PaginationItem key={index}>
-//                 <PaginationLink
-//                   isActive={page === index + 1}
-//                   onClick={() => handlePage(index + 1)}
-//                 >
-//                   {index + 1}
-//                 </PaginationLink>
-//               </PaginationItem>
-//             ))}
-//             <PaginationItem>
-//               <PaginationNext onClick={handleNext} />
-//             </PaginationItem>
-//           </PaginationContent>
-//         </Pagination>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -236,11 +87,10 @@ export default function Home() {
 
   const getPageRange = (currentPage: number, totalPages: number) => {
     const maxVisiblePages = 2;
-    let startPage = Math.max(1, currentPage - 2); // 2 pages before
-    let endPage = Math.min(totalPages, currentPage + 2); // 2 pages after
+    let startPage = Math.max(1, currentPage - 2); 
+    let endPage = Math.min(totalPages, currentPage + 2); 
 
     if (endPage - startPage < maxVisiblePages - 1) {
-      // If the visible range is too small, adjust it
       if (currentPage - startPage < 2) {
         endPage = Math.min(totalPages, endPage + (maxVisiblePages - (endPage - startPage)));
       } else {
@@ -325,3 +175,51 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+import { useEffect, useState, createContext, useContext, PropsWithChildren } from "react";
+import axios from "axios";
+
+const Access_Token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
+
+type Genre = {
+    id: number;
+    name: string;
+}
+
+type GenreContextType = {
+    genres: Genre[];
+}
+
+const GenreContext = createContext<GenreContextType>({
+    genres: []
+});
+
+export const GenreProvider = ({ children }: PropsWithChildren) => {
+    const [genres, setGenres] = useState<Genre[]>([]); // Initialized as an empty array
+
+    useEffect(() => {
+        const getGenres = async () => {
+            const { data } = await axios.get(
+                `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${Access_Token}`,
+                    },
+                }
+            );
+            setGenres(data.genres);
+        };
+        getGenres();
+    }, []);
+
+    return (
+        <GenreContext.Provider value={{ genres }}>
+            {children}
+        </GenreContext.Provider>
+    );
+};
+
+export const useGenres = () => useContext(GenreContext);
