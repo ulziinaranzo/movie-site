@@ -5,6 +5,7 @@ import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Access_Token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
@@ -24,6 +25,7 @@ type Response = {
 export const TopRated = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+    const router = useRouter();
 
   useEffect(() => {
     const getMoviesByAxios = async () => {
@@ -59,7 +61,7 @@ export const TopRated = () => {
           Top Rated
         </div>
         <Link href={"/topRated"}>
-          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black">
+          <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black" onClick={() => {router.push("/topRated")}}>
             See more <ArrowIcon />
           </div>
         </Link>

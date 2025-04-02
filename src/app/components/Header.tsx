@@ -13,6 +13,9 @@ import {
 import Link from "next/link";
 import axios from "axios";
 
+const Access_Token = "your_access_token_here";
+
+// Define the genre names
 const type = [
   "Action",
   "Adventure",
@@ -43,12 +46,41 @@ const type = [
   "Western",
 ];
 
+// Map genre names to IDs
+const genreIdMapping: { [key: string]: number } = {
+  Action: 28,
+  Adventure: 12,
+  Animation: 16,
+  Biography: 99,
+  Comedy: 35,
+  Crime: 80,
+  Documentary: 99,
+  Drama: 18,
+  Family: 10751,
+  Fantasy: 14,
+  "Flim-Noir": 80,
+  "Game-Show": 10764,
+  History: 36,
+  Horror: 27,
+  Music: 10402,
+  Musical: 10402,
+  Mystery: 9648,
+  "News": 10763,
+  "Reality-TV": 10764,
+  Romance: 10749,
+  "Sci-Fi": 878,
+  Short: 10770,
+  Sport: 10764,
+  "Talk-Show": 10767,
+  Thriller: 53,
+  War: 10752,
+  Western: 37,
+};
+
 interface HeaderProps {
   setDarkMode: (prev: boolean) => void;
   darkMode: boolean;
 }
-
-const Access_Token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
 
 export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   const [searchValue, setSearchValue] = useState("");
@@ -56,7 +88,44 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
+  const movieListRef = useRef<HTMLDivElement>(null);
 
+  // Fetch movies by genre
+  const searchMoviesByGenre = async (genreId: number) => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/discover/movie?with_genres=${genreId}&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer ${Access_Token}`,
+          },
+        }
+      );
+      setMovies(data.results);
+      setShowResults(true);
+
+      // Scroll to the movie list after genre is clicked
+      if (movieListRef.current) {
+        movieListRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch (error) {
+      console.error("Error fetching movies by genre:", error);
+      setMovies([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle genre click
+  const handleGenreClick = (genreName: string) => {
+    const genreId = genreIdMapping[genreName];
+    if (genreId) {
+      searchMoviesByGenre(genreId);
+    }
+  };
+
+  // Fetch movies by search query
   const searchMovies = async (query: string) => {
     if (!query.trim()) {
       setMovies([]);
@@ -133,21 +202,21 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
               <LineIcon />
             </div>
             <div className="flex flex-wrap w-[537px] gap-[16px] dark:bg-[#171717] dark:text-white bg-white text-black">
-              {type.map((item, index) => {
-                return (
-                  <Badge
-                    variant="outline"
-                    key={index}
-                    className="cursor-pointer bg-white dark:bg-black border-white"
-                  >
-                    {item}
-                    <GenreIcon />
-                  </Badge>
-                );
-              })}
+              {type.map((genreName, index) => (
+                <Badge
+                  key={index}
+                  variant="outline"
+                  className="cursor-pointer bg-white dark:bg-black border-white"
+                  onClick={() => handleGenreClick(genreName)}
+                >
+                  {genreName}
+                  <GenreIcon />
+                </Badge>
+              ))}
             </div>
           </PopoverContent>
         </Popover>
+
         <div className="hidden lg:flex relative">
           <img
             src="/Images/_magnifying-glass.png"
@@ -208,6 +277,11 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
           onClick={() => setDarkMode(!darkMode)}
           alt={darkMode ? "Dark mode" : "Light Mode"}
         />
+      </div>
+
+      {/* Movie List Section */}
+      <div ref={movieListRef} className="mt-12">
+        {/* This will be where the movie list is displayed */}
       </div>
     </div>
   );
