@@ -13,69 +13,9 @@ import {
 import Link from "next/link";
 import axios from "axios";
 
-const Access_Token = "your_access_token_here";
+const Access_Token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
 
-// Define the genre names
-const type = [
-  "Action",
-  "Adventure",
-  "Animation",
-  "Biography",
-  "Comedy",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Family",
-  "Fantasy",
-  "Flim-Noir",
-  "Game-Show",
-  "History",
-  "Horror",
-  "Music",
-  "Musical",
-  "Mystery",
-  "News",
-  "Reality-TV",
-  "Romance",
-  "Sci-Fi",
-  "Short",
-  "Sport",
-  "Talk-Show",
-  "Thriller",
-  "War",
-  "Western",
-];
 
-// Map genre names to IDs
-const genreIdMapping: { [key: string]: number } = {
-  Action: 28,
-  Adventure: 12,
-  Animation: 16,
-  Biography: 99,
-  Comedy: 35,
-  Crime: 80,
-  Documentary: 99,
-  Drama: 18,
-  Family: 10751,
-  Fantasy: 14,
-  "Flim-Noir": 80,
-  "Game-Show": 10764,
-  History: 36,
-  Horror: 27,
-  Music: 10402,
-  Musical: 10402,
-  Mystery: 9648,
-  "News": 10763,
-  "Reality-TV": 10764,
-  Romance: 10749,
-  "Sci-Fi": 878,
-  Short: 10770,
-  Sport: 10764,
-  "Talk-Show": 10767,
-  Thriller: 53,
-  War: 10752,
-  Western: 37,
-};
 
 interface HeaderProps {
   setDarkMode: (prev: boolean) => void;
@@ -90,7 +30,6 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   const timeoutRef = useRef<NodeJS.Timeout>();
   const movieListRef = useRef<HTMLDivElement>(null);
 
-  // Fetch movies by genre
   const searchMoviesByGenre = async (genreId: number) => {
     setLoading(true);
     try {
@@ -105,7 +44,6 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
       setMovies(data.results);
       setShowResults(true);
 
-      // Scroll to the movie list after genre is clicked
       if (movieListRef.current) {
         movieListRef.current.scrollIntoView({ behavior: "smooth" });
       }
@@ -117,7 +55,6 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
     }
   };
 
-  // Handle genre click
   const handleGenreClick = (genreName: string) => {
     const genreId = genreIdMapping[genreName];
     if (genreId) {
@@ -125,7 +62,7 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
     }
   };
 
-  // Fetch movies by search query
+
   const searchMovies = async (query: string) => {
     if (!query.trim()) {
       setMovies([]);

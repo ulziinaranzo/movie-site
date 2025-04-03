@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { StarIcon } from "../assets/StarIcon";
 import axios from "axios";
+import Link from "next/link";
 
 const Access_Token =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
@@ -53,7 +54,7 @@ export const Popular = () => {
   return (
     <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-red-600 dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
-        <div className="flex text-[24px] font-[600] text-black darl:text-white mb-[4px]">
+        <div className="flex text-[24px] font-[600] text-black dark:text-white mb-[4px]">
           Popular
         </div>
         <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black">
@@ -62,8 +63,8 @@ export const Popular = () => {
       </div>
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {movies.map((movie, index) => (
+          <Link href={`/movie/${movie.id}` } key={index}>
           <div
-            key={index}
             className="flex flex-col items-center rounded-lg overflow-hidden hover:bg-sky-700 "
           >
             <img
@@ -84,7 +85,9 @@ export const Popular = () => {
               </div>
             </div>
           </div>
+          </Link>
         ))}
+        
       </div>
     </div>
   );

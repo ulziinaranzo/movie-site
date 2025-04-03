@@ -61,7 +61,7 @@ export default function Home() {
       setLoading(true);
       try {
         const { data } = await axios.get<Response>(
-          `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
+          `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=${page}`
           {
             headers: {
               Authorization: `Bearer ${Access_Token}`,
@@ -84,10 +84,11 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
+
   const getPageRange = (currentPage: number, totalPages: number) => {
     const maxVisiblePages = 2;
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, currentPage + 2);
+    let startPage = Math.max(1, currentPage - 2); 
+    let endPage = Math.min(totalPages, currentPage + 2); 
 
     if (endPage - startPage < maxVisiblePages - 1) {
       if (currentPage - startPage < 2) {
@@ -105,12 +106,10 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full max-w-[1440px] mx-auto h-fit px-[20px] lg:px-[80px] pb-[52px] gap-[32px] dark:text-white text-black dark:bg-black bg-white">
       <div className="flex justify-between text-center items-center">
-        <h1 className="text-[24px] font-[600] dark:text-white text-black mb-[4px]">
-          Upcoming Movies
-        </h1>
+        <div className="flex text-[24px] font-[600] dark:text-white text-black mb-[4px]">
+         More like this
+        </div>
       </div>
-
-      {/* Movie Grid */}
       <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
         {movies.map((movie) => (
           <div
@@ -137,23 +136,18 @@ export default function Home() {
           </div>
         ))}
       </div>
-
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center">
-        <Pagination aria-label="Movie Pagination">
+      <div className="flex justify-items-end">
+        <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious onClick={handlePrev} disabled={page === 1} />
+              <PaginationPrevious onClick={handlePrev} />
             </PaginationItem>
-
             {startPage > 1 && (
               <PaginationItem>
                 <PaginationLink onClick={() => handlePage(1)}>1</PaginationLink>
               </PaginationItem>
             )}
-
             {startPage > 2 && <PaginationEllipsis />}
-
             {[...Array(endPage - startPage + 1)].map((_, index) => (
               <PaginationItem key={index}>
                 <PaginationLink
@@ -164,9 +158,7 @@ export default function Home() {
                 </PaginationLink>
               </PaginationItem>
             ))}
-
             {endPage < totalPages - 1 && <PaginationEllipsis />}
-
             {endPage < totalPages && (
               <PaginationItem>
                 <PaginationLink onClick={() => handlePage(totalPages)}>
@@ -174,9 +166,8 @@ export default function Home() {
                 </PaginationLink>
               </PaginationItem>
             )}
-
             <PaginationItem>
-              <PaginationNext onClick={handleNext} disabled={page === totalPages} />
+              <PaginationNext onClick={handleNext} />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
@@ -184,3 +175,4 @@ export default function Home() {
     </div>
   );
 }
+
