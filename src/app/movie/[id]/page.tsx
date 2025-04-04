@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { Badge } from "@/components/ui/badge";
 import { StarWhite } from "@/app/assets/StarWhite";
@@ -42,6 +42,8 @@ export type Movie = {
 };
 type Response = {
   results: Movie[];
+  total_pages: number;
+  total_results: number;
 };
 type Video = {
   key: string;
@@ -59,6 +61,7 @@ const formatRunTime = (runtime: string) => {
 
 const MoviePage = () => {
   const { id } = useParams<Params>();
+  const router = useRouter();
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [credits, setCredits] = useState<Credits | null>(null);
   const [movieCertification, setMovieCertification] = useState<string | null>("N/A");

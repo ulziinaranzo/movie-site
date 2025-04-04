@@ -137,9 +137,7 @@ export default function Home() {
           </div>
         ))}
       </div>
-
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-end items-center">
         <Pagination aria-label="Movie Pagination">
           <PaginationContent>
             <PaginationItem>
