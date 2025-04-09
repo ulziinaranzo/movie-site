@@ -1,16 +1,13 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import { Badge } from "@/components/ui/badge";
 import { StarWhite } from "@/app/assets/StarWhite";
 import { StarIcon } from "lucide-react";
 import { ArrowIcon } from "@/app/assets/ArrowIcon";
-import Link from "next/link";
 import { PlayIconTrailer } from "@/app/assets/PlayIconTrailer";
-
-
+import Link from "next/link";
 
 type Params = { id: string };
 type MovieDetails = {
@@ -31,25 +28,9 @@ type Credits = {
   writers: string | null;
   cast: string | null;
 };
-export type Movie = {
-  vote_average: number;
-  id: number;
-  genre_ids: number[];
-  backdrop_path: "string";
-  poster_path: "string";
-  title: "string";
-  overview: "string";
-};
-type Response = {
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
-};
-type Video = {
-  key: string;
-  type: string;
-}
-const Access_Token =  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
+
+const Access_Token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YWI2NTUxNzRmNThkNWM0MzgzZDJiMzQzZTM1NzMxNCIsIm5iZiI6MTc0MzE1MDY0NC4xMzUsInN1YiI6IjY3ZTY1ZTM0M2U2NWM4ZWE4OGJhM2EwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Ys86E8XJOdTpg5ll351TU3CKG9veVwrbjMneJdAxIHg";
 
 const formatRunTime = (runtime: string) => {
   const runtimeNumber = parseInt(runtime, 10);
@@ -61,13 +42,12 @@ const formatRunTime = (runtime: string) => {
 
 const MoviePage = () => {
   const { id } = useParams<Params>();
-  const router = useRouter();
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [credits, setCredits] = useState<Credits | null>(null);
   const [movieCertification, setMovieCertification] = useState<string | null>("N/A");
   const [trailer, setTrailer] = useState<string | null>(null);
-  const [trailerShow, setTrailerShow] = useState<boolean>(false); 
-  const [similarMovie, setSimilarMovie] = useState<Movie[]>([])
+  const [trailerShow, setTrailerShow] = useState<boolean>(false);
+  const [similarMovie, setSimilarMovie] = useState<Movie[]>([]);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -119,7 +99,7 @@ const MoviePage = () => {
             },
           }
         );
-        const usRelease = data.results.find((item) => item.iso_3166_1 === "US");
+        const usRelease = data.results.find((item: any) => item.iso_3166_1 === "US");
         const certification = usRelease?.release_dates[0]?.certification || "N/A";
         setMovieCertification(certification);
       } catch (error) {
@@ -137,7 +117,7 @@ const MoviePage = () => {
             },
           }
         );
-        const trailerData = data.results.find((video: Video) => video.type === "Trailer");
+        const trailerData = data.results.find((video: any) => video.type === "Trailer");
         if (trailerData) {
           setTrailer(trailerData.key);
         }
@@ -177,7 +157,7 @@ const MoviePage = () => {
 
   return (
     <div className="w-[1440px] h-fit m-auto">
-      <div className="flex flex-col dark:bg-black bg-white lg:pl-[180px] lg:pr-[180px] lg:pt-[52px] lg:pb-[113px]">
+      <div className="flex flex-col dark:bg-black bg-white lg:pl-[180px] lg:pr-[180px] lg:pt-[52px] lg:pb-[113px] dark:bg-[black] bg-white text-black text-white">
         <div className="flex justify-between gap-[4px] mb-[24px]">
           <div className="flex flex-col">
             <div className="font-[700px] text-[36px] text-white">{movieDetails.title}</div>
@@ -225,29 +205,29 @@ const MoviePage = () => {
         <div className="flex flex-col gap-[20px]">
           <div className="flex gap-[12px]">
             {movieDetails.genres.map((item, index) => (
-              <Badge key={index} variant="outline" className="text-white">
+              <Badge key={index} variant="outline" className="dark:text-[white] text-black">
                 {item.name}
               </Badge>
             ))}
           </div>
-          <div className="font-normal w-[1080px] h-[48px] text-white">
+          <div className="font-normal w-[1080px] h-fit dark:text-[white] text-black ">
             {movieDetails.overview}
           </div>
           <div className="flex gap-[53px]">
             <div className="flex flex-col mt-[20px]">
               <div className="flex">
-                <div className="font-bold text-[16px] text-[white] w-64 mb-[6px]">Director</div>
-                <div className="text-[16px] font-[400] text-white">{credits.director}</div>
+                <div className="font-bold text-[16px] dark:text-[white] text-black w-64 mb-[6px]">Director</div>
+                <div className="text-[16px] font-[400] dark:text-[white] text-black">{credits.director}</div>
               </div>
               <img src="/Images/Separator.png" className="w-[1080px] h-[6px]" />
               <div className="flex">
-                <div className="font-bold text-[16px] text-[white] w-64 mb-[6px]">Writers</div>
-                <div className="text-[16px] font-[400] text-white">{credits.writers}</div>
+                <div className="font-bold text-[16px] dark:text-[white] text-black w-64 mb-[6px]">Writers</div>
+                <div className="text-[16px] font-[400] dark:text-[white] text-black">{credits.writers}</div>
               </div>
               <img src="/Images/Separator.png" className="w-[1080px] h-[6px]" />
               <div className="flex">
-                <div className="font-bold text-[16px] text-[white] w-64 mb-[6px]">Stars</div>
-                <div className="text-[16px] font-[400] text-white">{credits.cast} </div>
+                <div className="font-bold text-[16px] dark:text-[white] text-black w-64 mb-[6px]">Stars</div>
+                <div className="text-[16px] font-[400] dark:text-[white] text-black">{credits.cast} </div>
               </div>
               <img src="/Images/Separator.png" className="w-[1080px] h-[6px]" />
             </div>
@@ -264,24 +244,19 @@ const MoviePage = () => {
           </div>
         )}
         <div className="flex justify-between text-center items-center">
-                <div className="flex text-[24px] font-[600] dark:text-white text-black  mt-[32px] mb-[36px]">
-                  More like this
-                </div>
-                <Link href={"/upcoming"}>
-                  <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black"  onClick={() => {router.push("/upcoming")}}>
-                    See more <ArrowIcon />
-                  </div>
-                  </Link>
-              </div>
+          <div className="flex text-[24px] font-[600] dark:text-white text-black mt-[32px] mb-[36px]">
+            More like this
+          </div>
+          <Link href={"/upcoming"}>
+            <div className="flex items-center text-[14px] font-[500] gap-[8px] cursor-pointer dark:text-white text-black">
+              See more <ArrowIcon />
+            </div>
+          </Link>
+        </div>
         <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-[32px]">
-          
-          {similarMovie.map((movie) => {
-            return (
-              <Link href={`/movie/${movie.id}`}>
-              <div
-                key={movie.id}
-                className="flex flex-col items-center rounded-lg overflow-hidden"
-              >
+          {similarMovie.map((movie) => (
+            <Link href={`/movie/${movie.id}`} key={movie.id}>
+              <div className="flex flex-col items-center rounded-lg overflow-hidden">
                 <img
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   alt={movie.title}
@@ -291,18 +266,13 @@ const MoviePage = () => {
                   <div className="flex items-center text-sm lg:text-[16px] text-black gap-[5px]">
                     <StarWhite />
                     <b>{movie.vote_average.toFixed(1)}</b>
-                    <span className="text-[12px] text-[#71717A] font-[500]">
-                      /10
-                    </span>
+                    <span className="text-[12px] text-[#71717A] font-[500]">/10</span>
                   </div>
-                  <div className="text-sm lg:text-[18px] text-black">
-                    {movie.title}
-                  </div>
+                  <div className="text-sm lg:text-[18px] text-black">{movie.title}</div>
                 </div>
               </div>
-              </Link>
-            );
-          })}
+            </Link>
+          ))}
         </div>
       </div>
     </div>
