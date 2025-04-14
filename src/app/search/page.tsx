@@ -18,7 +18,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { StarIcon } from "../assets/StarIcon";
-import { Access_Token } from "../upcoming/page";
+import { Access_Token } from "../components/Types";
 
 
   export type Movie = {
