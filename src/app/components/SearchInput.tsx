@@ -55,7 +55,7 @@ export const SearchInput = ({
   return (
     <div>
       {!searchButton && (
-        <div className="lg:hidden mb-2">
+        <div className="flex lg:hidden mb-2">
           <img
             className="w-[41px] h-[41px] dark:hidden block"
             src="/Images/Modes(1).png"
@@ -81,14 +81,8 @@ export const SearchInput = ({
             }}
             className="absolute left-0 top-[10px] z-10"
           >
-            <img
-              src="/Images/BackArrow.png"
-              alt="Back"
-              className="w-6 h-6 ml-2"
-            />
           </button>
 
-          {/* Search icons */}
           <img
             src="/Images/glass_black.png"
             className="absolute left-10 top-2.5 w-4 h-4 block dark:hidden"
@@ -96,7 +90,7 @@ export const SearchInput = ({
           />
           <img
             src="/Images/_magnifying-glass.png"
-            className="absolute left-10 top-2.5 w-4 h-4 hidden dark:block"
+            className="absolute lg:left-10 top-2.5 left-3 w-4 h-4 hidden dark:block"
             alt="Search Icon Dark"
           />
 
@@ -106,7 +100,7 @@ export const SearchInput = ({
             onChange={handleChange}
             onFocus={() => setShowResults(searchValue.trim() !== "")}
             placeholder="Search"
-            className="w-full pl-16 dark:text-white text-black"
+            className="lg:w-full w-[251px] lg:pl-16 pl-10 dark:text-white text-black"
           />
 
           {showResults && (
