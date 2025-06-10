@@ -8,6 +8,7 @@ import MovieMedia from "@/app/components/MovieIdMedia";
 import MovieInfo from "@/app/components/MovieIdInfo";
 import SimilarMovies from "@/app/components/MovieIdSimilarMovies";
 import { Access_Token } from "@/app/components/Types";
+import { Loader2 } from "lucide-react";
 
 const formatRunTime = (runtime: string) => {
   const runtimeNumber = parseInt(runtime, 10);
@@ -31,7 +32,7 @@ const MoviePage = () => {
   const [trailer, setTrailer] = useState<{ key: string; time: number } | null>(null);
   const [trailerShow, setTrailerShow] = useState<boolean>(false);
   const [similarMovie, setSimilarMovie] = useState<MovieDetails[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true); // ✅ Loading state
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,7 +87,14 @@ const MoviePage = () => {
   }, [id]);
 
   if (!movieDetails || !credits) {
-    return <div>Loading movie details...</div>;
+    return (
+      <div className="flex flex-col gap-[10px] pt-[50px]">
+        <div className="flex justify-center items-center flex-col text-bold text-[20px]">
+          <Loader2 className="w-8 h-8 animate-spin"/>
+          Loading movie details...
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -109,10 +117,10 @@ const MoviePage = () => {
         <MovieInfo movieDetails={movieDetails} credits={credits} />
 
         {trailerShow && trailer && (
-          <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-black bg-opacity-70 lg:bg-opacity-0 z-50">
+          <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray bg-opacity-100 lg:bg-opacity-0 z-50">
             <div className="relative">
               <button
-                className="absolute top-4 right-4 text-white text-2xl font-bold"
+                className="absolute top-4 right-4 text-white text-2xl font-bold rounded-full bg-gray w-[10px] h-[10px]"
                 onClick={() => setTrailerShow(false)}
               >
                 X
@@ -128,7 +136,7 @@ const MoviePage = () => {
           </div>
         )}
 
-        <SimilarMovies similarMovie={similarMovie} isLoading={isLoading} /> {/* ✅ pass isLoading */}
+        <SimilarMovies similarMovie={similarMovie} isLoading={isLoading} /> 
       </div>
     </div>
   );
