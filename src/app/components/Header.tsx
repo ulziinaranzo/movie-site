@@ -84,23 +84,21 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
         {!searchButton && (
           <button
             onClick={() => setSearchButton(true)}
-            className="lg:hidden"
+            className="lg:hidden mt-[2px]"
             aria-label="Open Search"
           >
             <img
-              className="w-[41px] h-[41px] dark:hidden block"
+              className="w-[41px] h-[41px] block dark:hidden"
               src="/Images/Modes(1).png"
               alt="Search Light"
             />
             <img
-              className="w-[41px] h-[41px] dark:block hidden"
+              className="w-[41px] h-[41px] hidden dark:block"
               src="/Images/Modes.png"
               alt="Search Dark"
             />
           </button>
         )}
-
-        {/* RootLayout-с дамжуулсан darkMode, setDarkMode-г дамжуулна */}
         <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
     </div>
