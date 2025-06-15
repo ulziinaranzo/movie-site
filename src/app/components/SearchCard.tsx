@@ -44,10 +44,6 @@ export const SearchCard = ({ loading, movies }: SearchCardProps) => {
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
                   className="object-cover w-full h-[233px] lg:h-[340px]"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      "/placeholder-movie.png";
-                  }}
                 />
                 <div className="bg-[#F4F4F5] dark:bg-[#27272A] w-full h-[76px] lg:h-[99px] p-2 flex flex-col justify-center">
                   <div className="flex items-center text-[12px] lg:text-sm text-black dark:text-white gap-1">

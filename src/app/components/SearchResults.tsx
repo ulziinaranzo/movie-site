@@ -3,6 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { StarWhite } from "../assets/StarWhite";
 import { ArrowIcon } from "../assets/ArrowIcon";
+import { WhiteArrowIcon } from "../assets/WhiteArrowIcon";
 
 export const SearchResults = ({
   movies,
@@ -15,7 +16,7 @@ export const SearchResults = ({
   searchValue: string;
   router: any;
 }) => (
-  <div className="absolute lg:top-full lg:left-[-140px] left-[-10px] mt-1 bg-white dark:bg-[#171717] shadow-lg rounded-lg z-50 lg:w-[577px] p-[12px] w-[355px] max-h-[200px] overflow-y-auto">
+  <div className="absolute lg:top-full lg:left-[-140px] left-[-10px] mt-1 bg-white dark:bg-[#171717] shadow-lg rounded-lg z-50 lg:w-[577px] p-[12px] w-[355px] max-h-[400px] overflow-y-auto">
     {loading ? (
       <div className="space-y-4">
         {Array.from({ length: 5 }).map((_, idx) => (
@@ -64,7 +65,13 @@ export const SearchResults = ({
               <div className="flex justify-between text-sm dark:text-white text-black">
                 <div>{movie.release_date?.split("-")[0]}</div>
                 <div className="flex items-center gap-1">
-                  See more <ArrowIcon />
+                  See more
+                  <span className="block dark:hidden">
+                    <WhiteArrowIcon />
+                  </span>
+                  <span className="hidden dark:block">
+                    <ArrowIcon />
+                  </span>
                 </div>
               </div>
             </div>

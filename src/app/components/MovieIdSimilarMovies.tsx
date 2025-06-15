@@ -63,10 +63,6 @@ export default function SimilarMovies({
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
                         className="absolute inset-0 w-full h-full object-cover group-hover:brightness-90 transition-all duration-300"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "/placeholder-movie.png";
-                        }}
                       />
                     </div>
 

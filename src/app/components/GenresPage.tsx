@@ -22,7 +22,7 @@ export const GenresPage = ({
   loading,
 }: GenresPageProps) => {
   return (
-    <div className="flex flex-wrap gap-4 lg:w-[387px] [308px]">
+    <div className="flex flex-wrap gap-4 lg:w-[387px] w-[308px]">
       {genres.length === 0 && loading
         ? Array.from({ length: 6 }).map((_, i) => (
             <Skeleton
