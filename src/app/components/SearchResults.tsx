@@ -86,7 +86,7 @@ export const SearchResults = ({
       className="text-sm font-medium pt-2.5 pb-2.5 pl-4 cursor-pointer dark:text-white text-black"
       onClick={() => router.push(`/search/${encodeURIComponent(searchValue)}`)}
     >
-      See all results for "{searchValue}"
+      {`See all results for '${searchValue}'`}
     </div>
   </div>
 );

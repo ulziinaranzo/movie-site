@@ -7,22 +7,18 @@ import { Genres } from "./Genres";
 import { SearchInput } from "./SearchInput";
 import { DarkModeToggle } from "./DarkModeToggle";
 
-export const Header = () => {
+type HeaderProps = {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
   const [searchValue, setSearchValue] = useState("");
   const [movies, setMovies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [searchButton, setSearchButton] = useState<boolean>(false);
-
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const savedMode = localStorage.getItem("darkMode");
-      if (savedMode !== null) return savedMode === "true";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return false;
-  });
 
   const searchMovies = async (query: string) => {
     if (!query.trim()) {
@@ -58,10 +54,6 @@ export const Header = () => {
     };
   }, [searchValue]);
 
-  useEffect(() => {
-    localStorage.setItem("darkMode", darkMode.toString());
-  }, [darkMode]);
-
   return (
     <div className="flex w-[375px] items-center bg-white dark:bg-black py-3 px-5 lg:px-20 relative lg:w-[1440px]">
       <Link href="/">
@@ -88,9 +80,7 @@ export const Header = () => {
         />
       </div>
 
-      {/* Search button + Dark toggle-г нэг flex-д оруулж gap=3 (12px) өгөх */}
       <div className="flex items-center gap-3 ml-3">
-        {/* Search button visible only on mobile */}
         {!searchButton && (
           <button
             onClick={() => setSearchButton(true)}
@@ -110,6 +100,7 @@ export const Header = () => {
           </button>
         )}
 
+        {/* RootLayout-с дамжуулсан darkMode, setDarkMode-г дамжуулна */}
         <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
     </div>
