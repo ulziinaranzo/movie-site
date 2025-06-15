@@ -116,7 +116,9 @@ export const Carousel = () => {
               {movies.map((movie, i) => (
                 <div key={movie.id} className="relative w-full shrink-0">
                   <img
-                    src={`https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original${
+                      movie.backdrop_path || movie.poster_path
+                    }`}
                     className="h-[246px] w-full lg:h-[600px] object-cover"
                     alt={movie.title}
                   />
@@ -132,7 +134,11 @@ export const Carousel = () => {
                     e.preventDefault();
                     goToSlide(i);
                   }}
-                  className={`h-2 w-2 rounded-full transition-all ${i === index % 3 ? 'bg-white opacity-100' : 'bg-white opacity-30'}`}
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    i === index % 3
+                      ? "bg-white opacity-100"
+                      : "bg-white opacity-30"
+                  }`}
                 />
               ))}
             </div>
@@ -161,7 +167,10 @@ export const Carousel = () => {
               </div>
             </div>
             <div className="flex items-center">
-              <StarIcon className="flex items-center w-6 h-6 lg:w-[28px] lg:h-[28px] lg:mt-[3px]" />
+              <div className="flex items-center w-6 h-6 lg:w-[28px] lg:h-[28px] lg:mt-[3px]">
+                <StarIcon />
+              </div>
+
               <div className="flex items-center text-[16px] lg:text-[18px] font-medium text-black dark:text-white lg:text-white ml-[8px] lg:font-[600] lg:mt-[8px]">
                 {movies[index].vote_average.toFixed(1)}
               </div>
@@ -181,8 +190,12 @@ export const Carousel = () => {
             }}
           >
             <div className="flex ">
-              <span className="hidden lg:inline"><PlayIcon /></span>
-              <span className="lg:hidden"><WhitePlayIcon /></span>
+              <span className="hidden lg:inline">
+                <PlayIcon />
+              </span>
+              <span className="lg:hidden">
+                <WhitePlayIcon />
+              </span>
             </div>
             Watch Trailer
           </button>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ArrowIcon } from "../assets/ArrowIcon";
-import { WhiteArrowIcon } from "../assets/WhiteArrowIcon"; // Цагаан icon light mode-д
+import { WhiteArrowIcon } from "../assets/WhiteArrowIcon"; 
 import { StarIcon } from "../assets/StarIcon";
 import axios from "axios";
 import Link from "next/link";
@@ -79,7 +79,7 @@ export const MovieSection = ({ title, endpoint, seeMoreLink }: Props) => {
                 className="flex flex-col items-center rounded-lg overflow-hidden w-[158px] lg:w-full group"
               >
                 <Skeleton className="w-[158px] h-[233px] lg:w-full lg:h-[340px] bg-[#F4F4F5] dark:bg-[#27272A] group-hover:opacity-80 transition-opacity" />
-                </div>
+              </div>
             ))
           : movies.map((movie) => (
               <Link href={`/movie/${movie.id}`} key={movie.id}>
@@ -95,11 +95,13 @@ export const MovieSection = ({ title, endpoint, seeMoreLink }: Props) => {
                   <div className="bg-[#F4F4F5] dark:bg-[#272729] w-[157px] lg:w-full h-[76px] lg:h-[99px] p-[8px] flex flex-col group-hover:bg-[#E5E5E5] dark:group-hover:bg-[#3A3A3A] transition-colors duration-300">
                     <div className="flex items-center text-sm lg:text-[16px] text-black dark:text-white gap-[5px]">
                       <span className="block dark:hidden w-4 h-4">
-                                                                <StarIcon className="w-full h-full" />
-                                                              </span>
-                                                              <span className="hidden dark:block w-4 h-4">
-                                                                <StarWhite className="w-full h-full" />
-                                                              </span>
+                        <div className="w-full h-full">
+                          <StarIcon />
+                        </div>
+                      </span>
+                      <span className="hidden dark:block w-4 h-4">
+                        <StarWhite className="w-full h-full" />
+                      </span>
                       <b>{movie.vote_average.toFixed(1)}</b>
                       <span className="text-[12px] text-[#71717A] dark:text-white font-[500] mt-[2px]">
                         /10

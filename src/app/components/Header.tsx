@@ -16,10 +16,10 @@ export const Header = () => {
   const [searchButton, setSearchButton] = useState<boolean>(false);
 
   const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedMode = localStorage.getItem('darkMode');
-      if (savedMode !== null) return savedMode === 'true';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (typeof window !== "undefined") {
+      const savedMode = localStorage.getItem("darkMode");
+      if (savedMode !== null) return savedMode === "true";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
     return false;
   });
@@ -33,7 +33,9 @@ export const Header = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+          query
+        )}&language=en-US&page=1`,
         { headers: { Authorization: `Bearer ${Access_Token}` } }
       );
       setMovies(data.results);
@@ -57,17 +59,22 @@ export const Header = () => {
   }, [searchValue]);
 
   useEffect(() => {
-    localStorage.setItem('darkMode', darkMode.toString());
+    localStorage.setItem("darkMode", darkMode.toString());
   }, [darkMode]);
 
   return (
-    <div className="flex w-full justify-between bg-white dark:bg-black py-3 px-5 lg:px-20 relative lg:w-max-[1440px]">
+    <div className="flex w-[375px] items-center bg-white dark:bg-black py-3 px-5 lg:px-20 relative lg:w-[1440px]">
       <Link href="/">
         {!searchButton && (
-          <img className="w-[92px] h-[20px] mt-2" src="/Images/Logo.png" alt="Logo" />
+          <img
+            className="w-[92px] h-[20px] mt-2"
+            src="/Images/Logo.png"
+            alt="Logo"
+          />
         )}
       </Link>
-      <div className="flex items-center gap-4 text-sm font-medium dark:bg-black bg-white">
+
+      <div className="flex items-center lg:gap-4 gap-[0px] text-sm font-medium dark:bg-black bg-white ml-auto">
         <Genres />
         <SearchInput
           searchValue={searchValue}
@@ -80,7 +87,31 @@ export const Header = () => {
           searchButton={searchButton}
         />
       </div>
-      <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+
+      {/* Search button + Dark toggle-г нэг flex-д оруулж gap=3 (12px) өгөх */}
+      <div className="flex items-center gap-3 ml-3">
+        {/* Search button visible only on mobile */}
+        {!searchButton && (
+          <button
+            onClick={() => setSearchButton(true)}
+            className="lg:hidden"
+            aria-label="Open Search"
+          >
+            <img
+              className="w-[41px] h-[41px] dark:hidden block"
+              src="/Images/Modes(1).png"
+              alt="Search Light"
+            />
+            <img
+              className="w-[41px] h-[41px] dark:block hidden"
+              src="/Images/Modes.png"
+              alt="Search Dark"
+            />
+          </button>
+        )}
+
+        <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+      </div>
     </div>
   );
 };

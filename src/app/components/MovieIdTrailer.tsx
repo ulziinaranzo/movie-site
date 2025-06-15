@@ -1,44 +1,37 @@
-import { PlayIconTrailer } from "@/app/assets/PlayIconTrailer";
-import { MovieDetails } from "./Types";
+"use client";
+import React from "react";
 
-interface MovieMediaProps {
-  movieDetails: MovieDetails;
+interface MovieIdTrailerProps {
   trailerShow: boolean;
   setTrailerShow: (show: boolean) => void;
-  trailer: string | null;
+  trailer: { key: string; time: number } | null;
 }
 
-export default function MovieMedia({ movieDetails, trailerShow, setTrailerShow, trailer }: MovieMediaProps) {
+export const MovieIdTrailer: React.FC<MovieIdTrailerProps> = ({
+  trailerShow,
+  setTrailerShow,
+  trailer,
+}) => {
+  if (!trailerShow || !trailer) return null;
+
   return (
-    <div className="flex gap-[32px] mb-[32px] relative">
-      {trailerShow && (
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 px-4">
+      <div className="relative w-full max-w-[997px]">
         <button
+          className="absolute top-2 right-2 text-white text-xl font-bold rounded-full bg-black bg-opacity-60 w-8 h-8 flex items-center justify-center"
           onClick={() => setTrailerShow(false)}
-          className="absolute top-[16px] right-[16px] text-white text-[24px] font-bold bg-black/60 rounded-full w-[32px] h-[32px] flex items-center justify-center hover:bg-black/80 z-10"
-          aria-label="Close Trailer"
         >
           ✕
         </button>
-      )}
-      <img
-        className="w-[290px] h-[428px]"
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-        alt={movieDetails.title}
-      />
-      <img
-        className="w-[760px] h-[428px]"
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path}`}
-        alt={movieDetails.title}
-      />
-      {!trailerShow && trailer && (
-        <button
-          className="flex items-center gap-[12px] absolute bottom-[10%] right-[45%] text-white text-[16px]"
-          onClick={() => setTrailerShow(true)}
-        >
-          <PlayIconTrailer />
-          Play Trailer
-        </button>
-      )}
+        <div className="w-full aspect-video">
+          <iframe
+            src={`https://www.youtube.com/embed/${trailer.key}`}
+            title="Movie Trailer"
+            className="w-full h-full rounded-lg"
+            allowFullScreen
+          />
+        </div>
+      </div>
     </div>
   );
-}
+};
