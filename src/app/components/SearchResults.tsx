@@ -4,6 +4,7 @@ import Link from "next/link";
 import { StarWhite } from "../assets/StarWhite";
 import { ArrowIcon } from "../assets/ArrowIcon";
 import { WhiteArrowIcon } from "../assets/WhiteArrowIcon";
+import { StarIcon } from "../assets/StarIcon";
 
 export const SearchResults = ({
   movies,
@@ -50,7 +51,10 @@ export const SearchResults = ({
                   {movie.title}
                 </div>
                 <div className="flex items-center text-sm dark:text-white text-black">
-                  <span className="mr-1 dark:block hidden">
+                  <span className="block dark:hidden">
+                    <StarIcon />
+                  </span>
+                  <span className="hidden dark:block">
                     <StarWhite />
                   </span>
                   <img
