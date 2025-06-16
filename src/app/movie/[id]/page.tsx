@@ -7,7 +7,6 @@ import MovieHeader from "@/app/components/MovieIdHeader";
 import MovieMedia from "@/app/components/MovieIdMedia";
 import MovieInfo from "@/app/components/MovieIdInfo";
 import SimilarMovies from "@/app/components/MovieIdSimilarMovies";
-import { Access_Token } from "@/app/components/Types";
 import { Loader2 } from "lucide-react";
 import { MovieIdTrailer } from "@/app/components/MovieIdTrailer";
 import {

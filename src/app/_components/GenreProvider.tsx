@@ -2,7 +2,6 @@
 import { useEffect, useState, PropsWithChildren, createContext } from "react";
 import { useContext } from "react";
 import axios from "axios";
-import { Access_Token } from "../components/Types";
 
 type Genre = {
   id: number;
