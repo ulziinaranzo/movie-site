@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { StarIcon } from "../assets/StarIcon";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Access_Token, MovieDetails } from "./Types";
+import { MovieDetails } from "./Types";
 import Link from "next/link";
 import { StarWhite } from "../assets/StarWhite";
 import { PaginationBottom } from "./PaginationBottom";
@@ -30,7 +30,7 @@ export const MovieListSection = ({ title, apiUrl }: Props) => {
       try {
         const { data } = await axios.get<Response>(`${apiUrl}&page=${page}`, {
           headers: {
-            Authorization: `Bearer ${Access_Token}`,
+            Authorization: `Bearer ${process.env.Access_Token}`,
           },
         });
         setMovies(data.results);

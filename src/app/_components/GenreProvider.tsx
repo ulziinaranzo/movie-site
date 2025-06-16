@@ -26,7 +26,7 @@ export const GenreProvider = ({ children }: PropsWithChildren<{}>) => {
         `https://api.themoviedb.org/3/genre/movie/list?language=en`,
         {
           headers: {
-            Authorization: `Bearer ${Access_Token}`,
+            Authorization: `Bearer ${process.env.Access_Token}`,
           },
         }
       );

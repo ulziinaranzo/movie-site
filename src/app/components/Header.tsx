@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Access_Token } from "../components/Types";
 import { Genres } from "./Genres";
 import { SearchInput } from "./SearchInput";
 import { DarkModeToggle } from "./DarkModeToggle";
@@ -32,7 +31,7 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
         `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
           query
         )}&language=en-US&page=1`,
-        { headers: { Authorization: `Bearer ${Access_Token}` } }
+        { headers: { Authorization: `Bearer ${process.env.Access_Token}` } }
       );
       setMovies(data.results);
       setShowResults(true);
@@ -91,11 +90,6 @@ export const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
               className="w-[41px] h-[41px] block dark:hidden"
               src="/Images/Modes(1).png"
               alt="Search Light"
-            />
-            <img
-              className="w-[41px] h-[41px] hidden dark:block"
-              src="/Images/Modes.png"
-              alt="Search Dark"
             />
           </button>
         )}

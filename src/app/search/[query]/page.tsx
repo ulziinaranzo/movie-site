@@ -3,7 +3,7 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Access_Token, Movie } from "@/app/components/Types";
+import {  Movie } from "@/app/components/Types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGenres } from "@/app/_components/GenreProvider";
 import { PaginationBottom } from "@/app/components/PaginationBottom";
@@ -42,7 +42,7 @@ export default function SearchResultsPage() {
           `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&page=${page}&language=en-US`,
           {
             headers: {
-              Authorization: `Bearer ${Access_Token}`,
+              Authorization: `Bearer ${process.env.Access_Token}`,
             },
           }
         );

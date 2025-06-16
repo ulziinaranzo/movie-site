@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useGenres } from "../_components/GenreProvider";
 import { Separator } from "@/components/ui/separator";
-import { Access_Token, Movie, Response } from "../components/Types";
+import { Movie, Response } from "../components/Types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PaginationBottom } from "../components/PaginationBottom";
 import { GenresPage } from "../components/GenresPage";
@@ -41,7 +41,7 @@ const SearchPage = () => {
           `https://api.themoviedb.org/3/discover/movie?language=en-US&with_genres=${genre}&page=${page}`,
           {
             headers: {
-              Authorization: `Bearer ${Access_Token}`,
+              Authorization: `Bearer ${process.env.Access_Token}`,
             },
           }
         );

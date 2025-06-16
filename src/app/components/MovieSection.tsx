@@ -7,7 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton"; 
-import { Access_Token, MovieDetails } from "./Types";
+import { MovieDetails } from "./Types";
 import { StarWhite } from "../assets/StarWhite";
 
 type Props = {
@@ -28,7 +28,7 @@ export const MovieSection = ({ title, endpoint, seeMoreLink }: Props) => {
           `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
           {
             headers: {
-              Authorization: `Bearer ${Access_Token}`,
+              Authorization: `Bearer ${process.env.Access_Token}`,
             },
           }
         );

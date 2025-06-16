@@ -6,7 +6,7 @@ import { PlayIcon } from "../assets/PlayIcon";
 import { WhitePlayIcon } from "../assets/WhitePlayIcon";
 import Link from "next/link";
 import axios from "axios";
-import { Access_Token, MovieDetails } from "@/app/components/Types";
+import { MovieDetails } from "@/app/components/Types";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type Response = {
@@ -27,7 +27,7 @@ export const Carousel = () => {
           "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
           {
             headers: {
-              Authorization: `Bearer ${Access_Token}`,
+              Authorization: `Bearer ${process.env.Access_Token}`,
             },
           }
         );
@@ -41,7 +41,7 @@ export const Carousel = () => {
               `https://api.themoviedb.org/3/movie/${moviesData[0].id}/videos?language=en-US`,
               {
                 headers: {
-                  Authorization: `Bearer ${Access_Token}`,
+                  Authorization: `Bearer ${process.env.Access_Token}`,
                 },
               }
             );

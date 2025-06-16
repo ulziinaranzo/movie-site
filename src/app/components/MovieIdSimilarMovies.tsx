@@ -4,7 +4,7 @@ import { StarWhite } from "@/app/assets/StarWhite";
 import { MovieDetails } from "./Types";
 import { StarIcon } from "../assets/StarIcon";
 import { WhiteArrowIcon } from "../assets/WhiteArrowIcon";
-import { Skeleton } from "@/components/ui/skeleton"; // Tailwind Skeleton component
+import { Skeleton } from "@/components/ui/skeleton"; 
 
 interface SimilarMoviesProps {
   similarMovie: MovieDetails[];
