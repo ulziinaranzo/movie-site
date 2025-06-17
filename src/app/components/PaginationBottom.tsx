@@ -29,7 +29,7 @@ export const PaginationBottom = ({
   handlePage,
 }: PaginationBottomProps) => {
   return (
-    <div className="w-full flex justify-end mt-6 pb-[32px]">
+    <div className="w-full flex justify-end pb-[32px]">
       <div className="ml-auto">
         <Pagination aria-label="Movie Pagination">
           <PaginationContent>

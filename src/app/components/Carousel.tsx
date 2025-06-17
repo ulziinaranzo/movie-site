@@ -8,6 +8,7 @@ import Link from "next/link";
 import axios from "axios";
 import { MovieDetails } from "@/app/components/Types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MovieIdTrailer } from "./MovieIdTrailer";
 
 type Response = {
   results: MovieDetails[];
@@ -99,9 +100,11 @@ export const Carousel = () => {
   }
 
   if (movies.length === 0) {
-    return <div className="w-full h-[246px] lg:h-[600px] mb-[52px] flex items-center justify-center">
-      Failed to load movies
-    </div>;
+    return (
+      <div className="w-full h-[246px] lg:h-[600px] mb-[52px] flex items-center justify-center">
+        Failed to load movies
+      </div>
+    );
   }
 
   return (
@@ -202,24 +205,11 @@ export const Carousel = () => {
         </div>
 
         {trailerShow && trailer && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50">
-            <div className="relative w-[90%] max-w-[997px]">
-              <iframe
-                width="100%"
-                height="561"
-                src={`https://www.youtube.com/embed/${trailer}?autoplay=1`}
-                title="Movie Trailer"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-              <button
-                onClick={() => setTrailerShow(false)}
-                className="absolute top-2 right-2 text-white text-xl bg-black bg-opacity-50 px-3 py-1 rounded"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
+          <MovieIdTrailer
+            setTrailerShow={setTrailerShow}
+            trailer={trailer}
+            trailerShow={trailerShow}
+          />
         )}
       </div>
     </div>

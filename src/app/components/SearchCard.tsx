@@ -12,7 +12,7 @@ type SearchCardProps = {
 
 export const SearchCard = ({ loading, movies }: SearchCardProps) => {
   return (
-    <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+    <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8 mb-6">
       {loading
         ? Array.from({ length: 8 }).map((_, i) => (
             <div
