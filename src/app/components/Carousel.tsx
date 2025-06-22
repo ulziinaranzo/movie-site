@@ -15,11 +15,11 @@ type Response = {
 };
 
 export const Carousel = () => {
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState(0);
   const [movies, setMovies] = useState<MovieDetails[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [trailer, setTrailer] = useState<string | null>(null);
-  const [trailerShow, setTrailerShow] = useState<boolean>(false);
+  const [trailerShow, setTrailerShow] = useState(false);
 
   useEffect(() => {
     const getMoviesByAxios = async () => {
@@ -37,23 +37,18 @@ export const Carousel = () => {
         setMovies(moviesData);
 
         if (moviesData.length > 0) {
-          try {
-            const trailerRes = await axios.get(
-              `https://api.themoviedb.org/3/movie/${moviesData[0].id}/videos?language=en-US`,
-              {
-                headers: {
-                  Authorization: `Bearer ${process.env.Access_Token}`,
-                },
-              }
-            );
-            const trailerData = trailerRes.data.results.find(
-              (video: any) => video.type === "Trailer"
-            );
-            setTrailer(trailerData?.key || null);
-          } catch (error) {
-            console.error("Error fetching trailer:", error);
-            setTrailer(null);
-          }
+          const trailerRes = await axios.get(
+            `https://api.themoviedb.org/3/movie/${moviesData[0].id}/videos?language=en-US`,
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.Access_Token}`,
+              },
+            }
+          );
+          const trailerData = trailerRes.data.results.find(
+            (video: any) => video.type === "Trailer"
+          );
+          setTrailer(trailerData?.key || null);
         }
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -74,23 +69,15 @@ export const Carousel = () => {
   }, [movies]);
 
   const nextButton = () => {
-    if (movies.length > 0) {
-      setIndex((prevIndex) => (prevIndex + 1) % movies.length);
-    }
+    setIndex((prev) => (prev + 1) % movies.length);
   };
 
   const prevButton = () => {
-    if (movies.length > 0) {
-      setIndex((prevIndex) =>
-        prevIndex === 0 ? movies.length - 1 : prevIndex - 1
-      );
-    }
+    setIndex((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
   };
 
   const goToSlide = (slideIndex: number) => {
-    if (movies.length > 0) {
-      setIndex(slideIndex % movies.length);
-    }
+    setIndex(slideIndex % movies.length);
   };
 
   if (loading) {
@@ -116,7 +103,7 @@ export const Carousel = () => {
               className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${index * 100}%)` }}
             >
-              {movies.map((movie, i) => (
+              {movies.map((movie) => (
                 <div key={movie.id} className="relative w-full shrink-0">
                   <img
                     src={`https://image.tmdb.org/t/p/original${
@@ -159,7 +146,17 @@ export const Carousel = () => {
         >
           ❯
         </button>
-        <div className="w-full max-w-[375px] lg:max-w-[1040px] p-[20px] lg:p-[40px] lg:absolute lg:top-[60%] lg:left-[50%] lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2">
+
+        <div
+          className="
+            w-full max-w-[375px] p-[20px] 
+            lg:max-w-[1040px] lg:p-[40px] 
+            lg:absolute lg:top-[60%] lg:left-[50%] 
+            lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 
+            lg:rounded-lg
+            "
+          style={{ pointerEvents: trailerShow ? "none" : "auto" }}
+        >
           <div className="flex justify-between lg:flex-col">
             <div className="flex flex-col">
               <div className="text-[14px] lg:text-[16px] lg:text-white text-black font-regular">
@@ -170,14 +167,14 @@ export const Carousel = () => {
               </div>
             </div>
             <div className="flex items-center">
-              <div className="flex items-center w-6 h-6 lg:w-[28px] lg:h-[28px] lg:mt-[3px]">
-                <StarIcon />
+              <div className="w-6 h-6 lg:w-[32px] lg:h-[32px] lg:mt-[20px]">
+                <img src="/Images/star.png" />
               </div>
 
-              <div className="flex items-center text-[16px] lg:text-[18px] font-medium text-black dark:text-white lg:text-white ml-[8px] lg:font-[600] lg:mt-[8px]">
+              <div className="flex items-center text-[16px] lg:text-[18px] font-medium text-black dark:text-white lg:text-white ml-[0px] lg:font-[600] lg:mt-[15px]">
                 {movies[index].vote_average.toFixed(1)}
               </div>
-              <span className="flex items-center text-[14px] lg:text-[16px] font-regular text-gray-300 ml-[1px] mt-[2px] lg:mt-[7px]">
+              <span className="flex items-center text-[14px] lg:text-[16px] font-regular text-gray-300 ml-[1px] mt-[2px] lg:mt-[14px]">
                 /10
               </span>
             </div>
@@ -186,29 +183,27 @@ export const Carousel = () => {
             {movies[index].overview}
           </div>
           <button
-            className="flex justify-center items-center h-[40px] lg:bg-white bg-black lg:text-black text-white gap-[8px] lg:gap-[4px] rounded-md font-[500] hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors px-[16px] mt-[16px]"
+            className="flex justify-center items-center h-[40px] bg-black text-white lg:bg-white lg:text-black gap-[8px] rounded-md font-[500] hover:bg-gray-800 lg:hover:bg-gray-200 transition-colors px-[16px] mt-[16px]"
             onClick={(e) => {
               e.preventDefault();
               setTrailerShow(true);
             }}
           >
-            <div className="flex ">
-              <span className="hidden lg:inline">
-                <PlayIcon />
-              </span>
-              <span className="lg:hidden">
-                <WhitePlayIcon />
-              </span>
-            </div>
+            <span className="hidden lg:inline">
+              <PlayIcon />
+            </span>
+            <span className="lg:hidden">
+              <WhitePlayIcon />
+            </span>
             Watch Trailer
           </button>
         </div>
 
         {trailerShow && trailer && (
           <MovieIdTrailer
+            trailerShow={trailerShow}
             setTrailerShow={setTrailerShow}
             trailer={trailer}
-            trailerShow={trailerShow}
           />
         )}
       </div>

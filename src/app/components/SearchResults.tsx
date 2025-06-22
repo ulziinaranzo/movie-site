@@ -57,11 +57,6 @@ export const SearchResults = ({
                   <span className="hidden dark:block">
                     <StarWhite />
                   </span>
-                  <img
-                    className="mr-1 w-4 h-4 block dark:hidden"
-                    src="/Images/Star.png"
-                    alt="Star Icon"
-                  />
                   {movie.vote_average.toFixed(1)}
                   <span className="text-[#71717A]"> /10</span>
                 </div>
