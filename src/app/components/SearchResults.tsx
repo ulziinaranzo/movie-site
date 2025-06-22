@@ -46,7 +46,7 @@ export const SearchResults = ({
               />
             )}
             <div className="flex flex-col gap-[12px] w-full">
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-[2px]">
                 <div className="font-semibold text-[20px] dark:text-white text-black">
                   {movie.title}
                 </div>
@@ -57,8 +57,11 @@ export const SearchResults = ({
                   <span className="hidden dark:block">
                     <StarWhite />
                   </span>
-                  {movie.vote_average.toFixed(1)}
-                  <span className="text-[#71717A]"> /10</span>
+                  <div className="mt-[1px] ml-[3px]">
+                    {movie.vote_average.toFixed(1)}
+                  </div>
+
+                  <span className="text-[#71717A] mt-[1.5px]"> /10</span>
                 </div>
               </div>
               <div className="flex justify-between text-sm dark:text-white text-black">

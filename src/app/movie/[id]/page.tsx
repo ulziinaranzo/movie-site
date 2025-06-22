@@ -13,7 +13,6 @@ import {
   formatRunTime,
   formatTrailerDuration,
 } from "@/app/components/Function";
-
 const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
@@ -27,7 +26,6 @@ const MoviePage = () => {
   const [trailerShow, setTrailerShow] = useState<boolean>(false);
   const [similarMovie, setSimilarMovie] = useState<MovieDetails[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
