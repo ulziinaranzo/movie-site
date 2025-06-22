@@ -37,31 +37,41 @@ const MoviePage = () => {
             axios.get(
               `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
               {
-                headers: { Authorization: `Bearer ${process.env.Access_Token}` },
+                headers: {
+                  Authorization: `Bearer ${process.env.Access_Token}`,
+                },
               }
             ),
             axios.get(
               `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
               {
-                headers: { Authorization: `Bearer ${process.env.Access_Token}` },
+                headers: {
+                  Authorization: `Bearer ${process.env.Access_Token}`,
+                },
               }
             ),
             axios.get(
               `https://api.themoviedb.org/3/movie/${id}/release_dates`,
               {
-                headers: { Authorization: `Bearer ${process.env.Access_Token}` },
+                headers: {
+                  Authorization: `Bearer ${process.env.Access_Token}`,
+                },
               }
             ),
             axios.get(
               `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
               {
-                headers: { Authorization: `Bearer ${process.env.Access_Token}` },
+                headers: {
+                  Authorization: `Bearer ${process.env.Access_Token}`,
+                },
               }
             ),
             axios.get(
               `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`,
               {
-                headers: { Authorization: `Bearer ${process.env.Access_Token}` },
+                headers: {
+                  Authorization: `Bearer ${process.env.Access_Token}`,
+                },
               }
             ),
           ]);
@@ -133,7 +143,7 @@ const MoviePage = () => {
         <MovieIdTrailer
           trailerShow={trailerShow}
           setTrailerShow={setTrailerShow}
-          trailer={trailer}
+          trailer={trailer?.key || null}
         />
         <SimilarMovies
           similarMovie={similarMovie}

@@ -4,7 +4,7 @@ import React from "react";
 interface MovieIdTrailerProps {
   trailerShow: boolean;
   setTrailerShow: (show: boolean) => void;
-  trailer: { key: string; time: number } | null;
+  trailer: string | null;
 }
 
 export const MovieIdTrailer: React.FC<MovieIdTrailerProps> = ({
@@ -25,7 +25,7 @@ export const MovieIdTrailer: React.FC<MovieIdTrailerProps> = ({
         </button>
         <div className="w-full aspect-video">
           <iframe
-            src={`https://www.youtube.com/embed/${trailer.key}`}
+            src={`https://www.youtube.com/embed/${trailer}`}
             title="Movie Trailer"
             className="w-full h-full rounded-lg"
             allowFullScreen
